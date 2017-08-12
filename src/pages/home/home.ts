@@ -1,29 +1,38 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { WeatherProvider } from '../../providers/weather/weather';
+import { Storage } from '@ionic/storage';
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+	selector: 'page-home',
+	templateUrl: 'home.html'
 })
 export class HomePage {
-	weather:any;
+	weather: any;
 	location: {
-		city:string,
-		country:string
+		city: string,
+		country: string
 	}
 
-  constructor(public navCtrl: NavController, private weatherProvider:WeatherProvider) {
-  }
+	constructor(
+		public navCtrl: NavController,
+		private weatherProvider: WeatherProvider,
+		private storage: Storage) {
+	}
 
 	ionViewWillEnter() {
-		this.location = {
-			city: 'Sambir',
-			country: 'UA'
-		}
-
-		this.weatherProvider.getWeather(this.location.city, this.location.country).subscribe(weather => {
-			this.weather = weather.current_observation;
+		this.storage.get('location').then((val) => {
+			if (val != null) {
+				this.location = JSON.parse(val);
+			} else {
+				this.location = {
+					city: 'Kyiv',
+					country: 'UA'
+				}
+			}
+			this.weatherProvider.getWeather(this.location.city, this.location.country).subscribe(weather => {
+				this.weather = weather.current_observation;
+			});
 		});
 	}
 

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HttpModule } from '@angular/http';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { AboutPage } from '../pages/about/about';
 import { HomePage } from '../pages/home/home';
@@ -14,31 +15,32 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { WeatherProvider } from '../providers/weather/weather';
 
 @NgModule({
-  declarations: [
-    MyApp,
-    AboutPage,
-    HomePage,
-    TabsPage,
+	declarations: [
+		MyApp,
+		AboutPage,
+		HomePage,
+		TabsPage,
 		SettingsPage
-  ],
-  imports: [
-    BrowserModule,
+	],
+	imports: [
+		BrowserModule,
 		HttpModule,
-    IonicModule.forRoot(MyApp)
-  ],
-  bootstrap: [IonicApp],
-  entryComponents: [
-    MyApp,
-    AboutPage,
-    HomePage,
-    TabsPage,
+		IonicModule.forRoot(MyApp),
+		IonicStorageModule.forRoot()
+	],
+	bootstrap: [IonicApp],
+	entryComponents: [
+		MyApp,
+		AboutPage,
+		HomePage,
+		TabsPage,
 		SettingsPage
-  ],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    WeatherProvider
-  ]
+	],
+	providers: [
+		StatusBar,
+		SplashScreen,
+		{ provide: ErrorHandler, useClass: IonicErrorHandler },
+		WeatherProvider
+	]
 })
-export class AppModule {}
+export class AppModule { }
