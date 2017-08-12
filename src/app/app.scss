@@ -33,3 +33,10 @@
 .description {
 	font-size: 30px;
 }
+
+.error {
+	font-size: 20px;
+	color: color($colors, danger);
+	text-align: center;
+	text-transform: uppercase;
+}
